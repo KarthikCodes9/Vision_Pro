@@ -18,18 +18,19 @@ function loco() {
     ScrollTrigger.refresh();
 }
 
-loco()
+loco();
 
-gsap.to("#page1>video", {
-    scrollTrigger: {
-        trigger: "#page1>video",
-        start: "2% top",
-        end: "bottom top",
-        markers: true,
-        scroller: ".main"
+gsap.registerPlugin(ScrollTrigger);
+
+ScrollTrigger.create({
+    trigger: "#page1",
+    start: "top center",
+    end: "bottom center",
+    onEnter: function () {
+        document.getElementById("video").play();
     },
-
-    onStart: () => {
-        document.querySelector("#page1>video").play();
-    }
+    onLeave: function () {
+        document.getElementById("video").pause();
+    },
+    markers: false
 });
